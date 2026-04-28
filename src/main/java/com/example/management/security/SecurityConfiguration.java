@@ -39,16 +39,7 @@ public class SecurityConfiguration {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/swagger-ui/**").permitAll()
-                        // Публичный доступ
-                        //.requestMatchers("/api/auth/**", "/api/public/**").permitAll()
-                        // Студенческий доступ
-                        //.requestMatchers("/api/courses/**", "/api/assignments/submit").hasRole("STUDENT")
-                        // Преподавательский доступ
-                        //.requestMatchers("/api/courses/create", "/api/assignment/grade").hasRole("TEACHER")
-                        // Администраторский доступ
-                        //.requestMatchers("/api/admin/**", "/api/users/**").hasRole("ADMIN")
-                        //.requestMatchers("/api/teacher/**").hasAllRoles("TEACHER", "ADMIN")
+                        .requestMatchers("/swagger-ui/**").permitAll()
                         .anyRequest().permitAll()
                 )
                 .addFilterBefore(jwtTokenFilter, AnonymousAuthenticationFilter.class);
