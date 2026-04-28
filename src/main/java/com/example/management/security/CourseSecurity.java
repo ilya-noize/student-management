@@ -1,7 +1,8 @@
 package com.example.management.security;
 
-import com.example.management.service.CourseRepository;
+import com.example.management.db.CourseRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -11,9 +12,14 @@ public class CourseSecurity {
     private final CourseRepository courseRepository;
 
     public boolean isCourseOwner(Long courseId) {
-        String login = SecurityContextHolder.getContext().getAuthentication().getName();
-        if (login == null) return false;
-//        return courseRepository.getOwnersLoginCourseById(courseId).equals(login);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!authentication.isAuthenticated()) {
+            return false;
+        }
+        String login = authentication.getName();
+        if (login == null) {
+            return false;
+        }
 
         return courseRepository.findById(courseId)
                 .map(course -> course.getOwner().getLogin().equals(login))

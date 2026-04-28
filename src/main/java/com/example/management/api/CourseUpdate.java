@@ -1,4 +1,4 @@
-package com.example.management.controller;
+package com.example.management.api;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
