@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  config:
+    import:
+      - optional:file:.env
+      - optional:classpath:.env
+      - optional:file:${user.dir}/.env
+  application:
+    name: course-app-backend
+  datasource:
+    url: jdbc:postgresql://localhost:5435/courseDB
+    username: course
+    password: course
+    driver-class-name : org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+jwt:
+  secret-key: ${JWT_SECRET_KEY}
+  lifetime: ${JWT_LIFETIME}
